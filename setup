@@ -1,0 +1,54 @@
+#SETUP
+1. init expo app
+expo init <app_name>
+
+2. install stack navigation (https://reactnavigation.org/docs/getting-started)
+npm install @react-navigation/native
+npx expo install react-native-screens react-native-safe-area-context
+npm install @react-navigation/native-stack
+
+
+3. setup app.js
+##import dependency
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+##init a stack
+const Stack = createNativeStackNavigator();
+
+#setup app function
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+#CUSTOMIZATION
+
+1. change status bar light/dark
+<StatusBar style="light" />
+2. navigator color 
+const navigationOption = {headerStyle: { backgroundColor: '#18181b' },
+3. set navigator screen option
+<Stack.Navigator screenOptions={navigationOption}>
+
+4. keyboard setup
+#get navigation header height
+const headerHeight = useHeaderHeight();
+
+#wrap the components
+<KeyboardAvoidingView
+behavior="padding"
+keyboardVerticalOffset={headerHeight}
+// behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+style={styles.keyboard}
+>
+<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+</TouchableWithoutFeedback>
+</KeyboardAvoidingView>
+
+
